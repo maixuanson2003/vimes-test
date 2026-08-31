@@ -1,0 +1,69 @@
+services:
+  database:
+    image: postgres:17-alpine
+    container_name: warehouse-database
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: warehouse
+      POSTGRES_USER: warehouse
+      POSTGRES_PASSWORD: warehouse
+    volumes:
+      - warehouse-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U warehouse -d warehouse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    image: warehouse-backend:latest
+    container_name: warehouse-backend
+    init: true
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+      DATABASE_URL: postgresql://warehouse:warehouse@database:5432/warehouse
+      DATABASE_SSL: "false"
+      MIGRATIONS_RUN: "true"
+      CORS_ORIGIN: http://localhost:3000
+      JWT_SECRET: ${JWT_SECRET:-development-only-jwt-secret-change-me}
+      JWT_EXPIRES_IN_SECONDS: ${JWT_EXPIRES_IN_SECONDS:-28800}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@vimes.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@123}
+      ADMIN_NAME: ${ADMIN_NAME:-Quản trị viên}
+      SEED_USER_PASSWORD: ${SEED_USER_PASSWORD:-User@123456}
+    ports:
+      - "3001:3001"
+    volumes:
+      - warehouse-upload-data:/app/uploads
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    image: warehouse-frontend:latest
+    container_name: warehouse-frontend
+    init: true
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      HOSTNAME: 0.0.0.0
+      PORT: "3000"
+      BACKEND_URL: http://backend:3001/api
+    ports:
+      - "3000:3000"
+
+volumes:
+  warehouse-postgres-data:
+  warehouse-upload-data:

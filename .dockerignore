@@ -1,0 +1,12 @@
+.git
+**/.git
+**/.next
+**/node_modules
+**/dist
+**/coverage
+**/uploads
+**/npm-debug.log*
+**/.env*
+!**/.env.example
+*.md
+ui design/mockup-phieu-nhap-kho.png

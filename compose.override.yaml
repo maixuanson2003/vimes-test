@@ -1,0 +1,38 @@
+services:
+  backend:
+    build:
+      target: development
+    command: npm run dev
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3001/health"]
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 5
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "500"
+    volumes:
+      - "./backend test:/app"
+      - backend-node-modules:/app/node_modules
+
+  frontend:
+    build:
+      target: development
+    command: npm run dev
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      WATCHPACK_POLLING: "true"
+      WATCHPACK_POLLING_INTERVAL: "500"
+    volumes:
+      - "./ui design/warehouse-ui:/app"
+      - frontend-node-modules:/app/node_modules
+      - frontend-next-cache:/app/.next
+
+volumes:
+  backend-node-modules:
+  frontend-node-modules:
+  frontend-next-cache:

@@ -1,0 +1,3 @@
+import { Router } from "express"; import { asyncHandler } from "../../middlewares/async-handler.js"; import { OrganizationController } from "../controllers/organization.controller.js";
+const controller = new OrganizationController(); export const organizationRouter = Router();
+organizationRouter.get("/", asyncHandler(controller.findAll)); organizationRouter.get("/:id", asyncHandler(controller.findById)); organizationRouter.post("/", asyncHandler(controller.create)); organizationRouter.patch("/:id", asyncHandler(controller.update)); organizationRouter.delete("/:id", asyncHandler(controller.delete));
