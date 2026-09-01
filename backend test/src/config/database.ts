@@ -10,13 +10,16 @@ import { CreateGoodsReceiptAttachments1788090000000 } from "../database/migratio
 import { AddReceiptUserRoles1788100000000 } from "../database/migrations/1788100000000-add-receipt-user-roles.js";
 import { RemovePreparerRole1788110000000 } from "../database/migrations/1788110000000-remove-preparer-role.js";
 import { CreateOrganizationDepartment1788120000000 } from "../database/migrations/1788120000000-create-organization-department.js";
+import { ExpandGoodsIssue1788130000000 } from "../database/migrations/1788130000000-expand-goods-issue.js";
+import { RepairGoodsIssueAttachments1788140000000 } from "../database/migrations/1788140000000-repair-goods-issue-attachments.js";
+import { RemoveProductMinimumStock1788150000000 } from "../database/migrations/1788150000000-remove-product-minimum-stock.js";
 import {
   GoodsIssue,
   GoodsIssueItem,
+  GoodsIssueAttachment,
   GoodsReceipt,
   GoodsReceiptAttachment,
   GoodsReceiptItem,
-  InventoryAdjustment,
   Product,
   Supplier,
   User,
@@ -36,7 +39,7 @@ export const AppDataSource = new DataSource({
     GoodsReceiptItem,
     GoodsIssue,
     GoodsIssueItem,
-    InventoryAdjustment,
+    GoodsIssueAttachment,
     User,
     Organization,
     Department,
@@ -51,6 +54,9 @@ export const AppDataSource = new DataSource({
     AddReceiptUserRoles1788100000000,
     RemovePreparerRole1788110000000,
     CreateOrganizationDepartment1788120000000,
+    ExpandGoodsIssue1788130000000,
+    RepairGoodsIssueAttachments1788140000000,
+    RemoveProductMinimumStock1788150000000,
   ],
   migrationsRun: env.MIGRATIONS_RUN,
   synchronize: false,

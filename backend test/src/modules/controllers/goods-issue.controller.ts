@@ -17,17 +17,31 @@ export class GoodsIssueController extends BaseController<GoodsIssue> {
   }
 
   createIssue: RequestHandler = async (req, res) => {
-    const data = await this.goodsIssueLogic.createIssue(req.body as CreateIssue);
+    const data = await this.goodsIssueLogic.createIssue(
+      req.body as CreateIssue,
+    );
     res.status(201).json({ success: true, data });
   };
 
+  nextNumber: RequestHandler = async (_req, res) => {
+    const count = await this.goodsIssueLogic.countNumberIssue();
+    res.json({
+      success: true,
+      data: { issueNumber: `PXK${String(count + 1).padStart(5, "0")}` },
+    });
+  };
+
   confirmIssue: RequestHandler = async (req, res) => {
-    const data = await this.goodsIssueLogic.confirmIssue(idSchema.parse(req.params.id));
+    const data = await this.goodsIssueLogic.confirmIssue(
+      idSchema.parse(req.params.id),
+    );
     res.json({ success: true, data });
   };
 
   cancelIssue: RequestHandler = async (req, res) => {
-    const data = await this.goodsIssueLogic.cancelIssue(idSchema.parse(req.params.id));
+    const data = await this.goodsIssueLogic.cancelIssue(
+      idSchema.parse(req.params.id),
+    );
     res.json({ success: true, data });
   };
 }

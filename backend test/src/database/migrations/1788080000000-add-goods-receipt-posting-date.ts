@@ -1,8 +1,6 @@
 import type { MigrationInterface, QueryRunner } from "typeorm";
 
-export class AddGoodsReceiptPostingDate1788080000000
-  implements MigrationInterface
-{
+export class AddGoodsReceiptPostingDate1788080000000 implements MigrationInterface {
   async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
       ALTER TABLE phieu_nhap_kho

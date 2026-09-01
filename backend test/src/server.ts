@@ -10,7 +10,13 @@ await new AuthLogic().bootstrapAdmin();
 await new AuthLogic().bootstrapRoleUsers();
 await new OrganizationBootstrapLogic().bootstrap();
 
-const server = createApp().listen(env.PORT, () => console.log(`API: http://localhost:${env.PORT}`));
-const shutdown = () => server.close(async () => { await AppDataSource.destroy(); process.exit(0); });
+const server = createApp().listen(env.PORT, () =>
+  console.log(`API: http://localhost:${env.PORT}`),
+);
+const shutdown = () =>
+  server.close(async () => {
+    await AppDataSource.destroy();
+    process.exit(0);
+  });
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);

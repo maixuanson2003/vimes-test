@@ -21,6 +21,10 @@ export class GoodsIssueLogic extends BaseLogic<
     this.productRepository = new ProductRepository(AppDataSource);
   }
 
+  countNumberIssue(): Promise<number> {
+    return this.repository.countNumberIssue();
+  }
+
   async createIssue(data: CreateIssue): Promise<GoodsIssue> {
     if (data.ItemIssue.length === 0) {
       throw new AppError(
@@ -51,7 +55,8 @@ export class GoodsIssueLogic extends BaseLogic<
     }
 
     const items = data.ItemIssue.map((item) => {
-      if (item.quantity <= 0 || item.unitPrice < 0) {
+      const documentQuantity = item.documentQuantity ?? item.quantity;
+      if (documentQuantity < 0 || item.quantity <= 0 || item.unitPrice < 0) {
         throw new AppError(
           400,
           "Issue quantity must be positive and unit price cannot be negative",
@@ -60,6 +65,7 @@ export class GoodsIssueLogic extends BaseLogic<
       }
       return {
         ...item,
+        documentQuantity,
         lineAmount:
           Math.round((item.quantity * item.unitPrice + Number.EPSILON) * 100) /
           100,

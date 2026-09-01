@@ -52,29 +52,35 @@ export function ReceiptWorkspace() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    Promise.all([api<Supplier[]>("/suppliers"), api<Product[]>("/products"), api<User[]>("/users")])
+    Promise.all([
+      api<Supplier[]>("/suppliers"),
+      api<Product[]>("/products"),
+      api<User[]>("/users"),
+    ])
       .then(([s, p, u]) => {
         setSuppliers(s);
         setProducts(p);
         setUsers(u);
         setPreparedById(u.find((user) => user.isActive)?.id ?? 0);
-        setStorekeeperId(u.find((user) => user.role === "STOREKEEPER")?.id ?? 0);
-        setChiefAccountantId(u.find((user) => user.role === "CHIEF_ACCOUNTANT")?.id ?? 0);
+        setStorekeeperId(
+          u.find((user) => user.role === "STOREKEEPER")?.id ?? 0,
+        );
+        setChiefAccountantId(
+          u.find((user) => user.role === "CHIEF_ACCOUNTANT")?.id ?? 0,
+        );
         setSupplierId(s[0]?.id ?? 0);
         setDelivererName("Trần Văn Hùng");
         setRows(
-          p
-            .slice(0, 5)
-            .map((x, i) => ({
-              id: i + 1,
-              productId: x.id,
-              name: x.name,
-              code: x.sku,
-              unit: x.unit,
-              documentQty: 1,
-              actualQty: 1,
-              unitPrice: x.purchasePrice,
-            })),
+          p.slice(0, 5).map((x, i) => ({
+            id: i + 1,
+            productId: x.id,
+            name: x.name,
+            code: x.sku,
+            unit: x.unit,
+            documentQty: 1,
+            actualQty: 1,
+            unitPrice: 1,
+          })),
         );
       })
       .catch((e) => setMessage(`Không tải được dữ liệu: ${e.message}`));
@@ -99,7 +105,7 @@ export function ReceiptWorkspace() {
           unit: p.unit,
           documentQty: 1,
           actualQty: 1,
-          unitPrice: p.purchasePrice,
+          unitPrice: 1,
         },
       ]);
   };
@@ -146,7 +152,8 @@ export function ReceiptWorkspace() {
         delivererName,
         warehouseName,
         location,
-        sourceDocument: [invoiceNumber, invoiceDate].filter(Boolean).join(" - ") || undefined,
+        sourceDocument:
+          [invoiceNumber, invoiceDate].filter(Boolean).join(" - ") || undefined,
         debitAccount,
         creditAccount,
         preparedById: preparedById || undefined,
@@ -181,8 +188,7 @@ export function ReceiptWorkspace() {
             ItemReceipt: payload.ItemReceipt,
           }),
         });
-      }
-      else {
+      } else {
         receipt = await api("/goods-receipts", {
           method: "POST",
           body: JSON.stringify(payload),
@@ -200,7 +206,9 @@ export function ReceiptWorkspace() {
             },
             body: file,
           });
-          setPendingAttachments((current) => current.filter((item) => item !== file));
+          setPendingAttachments((current) =>
+            current.filter((item) => item !== file),
+          );
         }
       }
       if (confirm)
@@ -321,16 +329,53 @@ export function ReceiptWorkspace() {
                 </Select>
               </FormField>
               <FormField label="Diễn giải">
-                <Input value={reason} onChange={(event) => setReason(event.target.value)} />
+                <Input
+                  value={reason}
+                  onChange={(event) => setReason(event.target.value)}
+                />
               </FormField>
               <FormField label="Người giao hàng">
-                <Input value={delivererName} onChange={(event) => setDelivererName(event.target.value)} />
+                <Input
+                  value={delivererName}
+                  onChange={(event) => setDelivererName(event.target.value)}
+                />
               </FormField>
               <FormField label="Người lập phiếu">
-                <Select value={preparedById} onChange={(event) => setPreparedById(Number(event.target.value))}><option value={0}>-- Chọn --</option>{users.filter((user) => user.isActive).map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}</Select>
+                <Select
+                  value={preparedById}
+                  onChange={(event) =>
+                    setPreparedById(Number(event.target.value))
+                  }
+                >
+                  <option value={0}>-- Chọn --</option>
+                  {users
+                    .filter((user) => user.isActive)
+                    .map((user) => (
+                      <option key={user.id} value={user.id}>
+                        {user.name}
+                      </option>
+                    ))}
+                </Select>
               </FormField>
               <FormField label="Kế toán trưởng">
-                <Select value={chiefAccountantId} onChange={(event) => setChiefAccountantId(Number(event.target.value))}><option value={0}>-- Chọn --</option>{users.filter((user) => user.role === "CHIEF_ACCOUNTANT" && user.isActive).map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}</Select>
+                <Select
+                  value={chiefAccountantId}
+                  onChange={(event) =>
+                    setChiefAccountantId(Number(event.target.value))
+                  }
+                >
+                  <option value={0}>-- Chọn --</option>
+                  {users
+                    .filter(
+                      (user) =>
+                        user.role === "CHIEF_ACCOUNTANT" && user.isActive,
+                    )
+                    .map((user) => (
+                      <option key={user.id} value={user.id}>
+                        {user.name}
+                      </option>
+                    ))}
+                </Select>
               </FormField>
             </div>
           </Card>
@@ -344,14 +389,16 @@ export function ReceiptWorkspace() {
                 onDelete={(id) => setRows((r) => r.filter((x) => x.id !== id))}
                 onChange={(id, patch) =>
                   setRows((current) =>
-                    current.map((row) => (row.id === id ? { ...row, ...patch } : row)),
+                    current.map((row) =>
+                      row.id === id ? { ...row, ...patch } : row,
+                    ),
                   )
                 }
               />
             </div>
           </Card>
           <Attachments
-            receiptId={receiptId}
+            documentId={receiptId}
             pendingFiles={pendingAttachments}
             onPendingFilesChange={setPendingAttachments}
           />
@@ -378,7 +425,16 @@ export function ReceiptWorkspace() {
               value={storekeeperId}
               onChange={(event) => setStorekeeperId(Number(event.target.value))}
               className="mt-3"
-            ><option value={0}>-- Chọn thủ kho --</option>{users.filter((user) => user.role === "STOREKEEPER" && user.isActive).map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}</Select>
+            >
+              <option value={0}>-- Chọn thủ kho --</option>
+              {users
+                .filter((user) => user.role === "STOREKEEPER" && user.isActive)
+                .map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.name}
+                  </option>
+                ))}
+            </Select>
           </Card>
           <Card className="p-5">
             <CardTitle>Tổng giá trị</CardTitle>
@@ -400,13 +456,25 @@ export function ReceiptWorkspace() {
           </Card>
           <Card className="p-5">
             <CardTitle>Hạch toán</CardTitle>
-            <Select className="mt-4" value={debitAccount} onChange={(event) => setDebitAccount(event.target.value)}>
+            <Select
+              className="mt-4"
+              value={debitAccount}
+              onChange={(event) => setDebitAccount(event.target.value)}
+            >
               <option>152 – Nguyên liệu, vật liệu</option>
             </Select>
-            <Select className="mt-3" value={creditAccount} onChange={(event) => setCreditAccount(event.target.value)}>
+            <Select
+              className="mt-3"
+              value={creditAccount}
+              onChange={(event) => setCreditAccount(event.target.value)}
+            >
               <option>331 – Phải trả người bán</option>
             </Select>
-            <Textarea className="mt-3" value={accountingNote} onChange={(event) => setAccountingNote(event.target.value)} />
+            <Textarea
+              className="mt-3"
+              value={accountingNote}
+              onChange={(event) => setAccountingNote(event.target.value)}
+            />
           </Card>
           <div className="sticky bottom-4 grid grid-cols-[1fr_1.7fr] gap-2 bg-[#f7f8f8] pt-2">
             <Button

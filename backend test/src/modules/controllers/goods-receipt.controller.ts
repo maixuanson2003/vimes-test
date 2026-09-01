@@ -2,7 +2,10 @@ import type { RequestHandler } from "express";
 import { BaseController } from "./base.controller.js";
 import { GoodsReceiptLogic } from "../logic/index.js";
 import { GoodsReceipt } from "../models/goods-receipt.entity.js";
-import type { createReceipt, updateReceipt } from "../types/goods-receipt.types.js";
+import type {
+  createReceipt,
+  updateReceipt,
+} from "../types/goods-receipt.types.js";
 import { z } from "zod";
 
 const idSchema = z.coerce.number().int().positive();

@@ -117,7 +117,9 @@ describe("GoodsIssueLogic", () => {
     const confirmed = { id: 1, status: WarehouseDocumentStatus.CONFIRMED };
     mocks.updateIssue.mockResolvedValue(confirmed);
 
-    await expect(new GoodsIssueLogic().confirmIssue(1)).resolves.toBe(confirmed);
+    await expect(new GoodsIssueLogic().confirmIssue(1)).resolves.toBe(
+      confirmed,
+    );
     expect(mocks.updateProduct).toHaveBeenCalledWith(
       10,
       { stockQuantity: 5 },

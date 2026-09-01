@@ -62,7 +62,10 @@ export class GoodsReceiptLogic extends BaseLogic<
     });
     for (const assignment of assignments) {
       const user = users.find((candidate) => candidate.id === assignment.id);
-      if (!user || (assignment.role !== null && user.role !== assignment.role)) {
+      if (
+        !user ||
+        (assignment.role !== null && user.role !== assignment.role)
+      ) {
         throw new AppError(
           400,
           assignment.role === null

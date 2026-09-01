@@ -3,7 +3,6 @@ export * from "./goods-issue-item.logic.js";
 export * from "./goods-issue.logic.js";
 export * from "./goods-receipt-item.logic.js";
 export * from "./goods-receipt.logic.js";
-export * from "./inventory-adjustment.logic.js";
 export * from "./product.logic.js";
 export * from "./supplier.logic.js";
 export * from "./warehouse-receipt.logic.js";

@@ -24,6 +24,14 @@ export class GoodsIssueItem {
   @JoinColumn({ name: "san_pham_id" })
   product!: Relation<Product>;
   @Column({
+    name: "so_luong_chung_tu",
+    type: "numeric",
+    precision: 18,
+    scale: 3,
+    transformer: numericTransformer,
+  })
+  documentQuantity!: number;
+  @Column({
     name: "so_luong_xuat",
     type: "numeric",
     precision: 18,

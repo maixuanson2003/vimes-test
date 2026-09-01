@@ -24,12 +24,22 @@ export class GoodsReceipt {
   receiptNumber!: string;
   @Column({ name: "ngay_lap", type: "date" }) receiptDate!: string;
   @Column({ name: "ngay_hach_toan", type: "date" }) postingDate!: string;
-  @Column({ name: "don_vi_id", type: "integer", nullable: true }) organizationId!: number | null;
-  @ManyToOne(() => Organization, (organization) => organization.receipts, { nullable: true, onDelete: "SET NULL" })
-  @JoinColumn({ name: "don_vi_id" }) organization!: Relation<Organization> | null;
-  @Column({ name: "bo_phan_id", type: "integer", nullable: true }) departmentId!: number | null;
-  @ManyToOne(() => Department, (department) => department.receipts, { nullable: true, onDelete: "SET NULL" })
-  @JoinColumn({ name: "bo_phan_id" }) department!: Relation<Department> | null;
+  @Column({ name: "don_vi_id", type: "integer", nullable: true })
+  organizationId!: number | null;
+  @ManyToOne(() => Organization, (organization) => organization.receipts, {
+    nullable: true,
+    onDelete: "SET NULL",
+  })
+  @JoinColumn({ name: "don_vi_id" })
+  organization!: Relation<Organization> | null;
+  @Column({ name: "bo_phan_id", type: "integer", nullable: true })
+  departmentId!: number | null;
+  @ManyToOne(() => Department, (department) => department.receipts, {
+    nullable: true,
+    onDelete: "SET NULL",
+  })
+  @JoinColumn({ name: "bo_phan_id" })
+  department!: Relation<Department> | null;
   @Column({ name: "tk_no", type: "varchar", length: 20, nullable: true })
   debitAccount!: string | null;
   @Column({ name: "tk_co", type: "varchar", length: 20, nullable: true })

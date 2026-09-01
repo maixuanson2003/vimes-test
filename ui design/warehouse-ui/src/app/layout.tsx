@@ -15,11 +15,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="vi"
-      className={`${geistSans.variable} h-full antialiased`}
-    >
-      <body className="min-h-full bg-[#f7f8f8]"><AppShell>{children}</AppShell></body>
+    <html lang="vi" className={`${geistSans.variable} h-full antialiased`}>
+      <body className="min-h-full bg-[#f7f8f8]">
+        <AppShell>{children}</AppShell>
+      </body>
     </html>
   );
 }

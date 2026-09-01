@@ -126,43 +126,43 @@ OTHER
 
 Quản lý danh mục sản phẩm.
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `code` | `varchar(50)` | Bắt buộc, duy nhất |
-| `name` | `varchar(255)` | Bắt buộc |
-| `parent_id` | `uuid` | FK tự tham chiếu, cho phép danh mục cha-con |
-| `is_active` | `boolean` | Mặc định `true` |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| Cột          | Kiểu           | Ràng buộc/ý nghĩa                           |
+| ------------ | -------------- | ------------------------------------------- |
+| `id`         | `uuid`         | Khóa chính                                  |
+| `code`       | `varchar(50)`  | Bắt buộc, duy nhất                          |
+| `name`       | `varchar(255)` | Bắt buộc                                    |
+| `parent_id`  | `uuid`         | FK tự tham chiếu, cho phép danh mục cha-con |
+| `is_active`  | `boolean`      | Mặc định `true`                             |
+| `created_at` | `timestamptz`  | Ngày tạo                                    |
+| `updated_at` | `timestamptz`  | Ngày cập nhật                               |
 
 ### 5.2. `units`
 
 Danh mục đơn vị tính như cái, hộp, kg, mét hoặc thùng.
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `code` | `varchar(30)` | Bắt buộc, duy nhất |
-| `name` | `varchar(100)` | Bắt buộc |
-| `is_active` | `boolean` | Mặc định `true` |
+| Cột         | Kiểu           | Ràng buộc/ý nghĩa  |
+| ----------- | -------------- | ------------------ |
+| `id`        | `uuid`         | Khóa chính         |
+| `code`      | `varchar(30)`  | Bắt buộc, duy nhất |
+| `name`      | `varchar(100)` | Bắt buộc           |
+| `is_active` | `boolean`      | Mặc định `true`    |
 
 ### 5.3. `products`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `sku` | `varchar(100)` | Bắt buộc, duy nhất |
-| `name` | `varchar(255)` | Bắt buộc |
-| `category_id` | `uuid` | FK tới `categories` |
-| `unit_id` | `uuid` | FK tới `units`, bắt buộc |
-| `purchase_price` | `numeric(18,2)` | Giá nhập tham khảo, không âm |
-| `sale_price` | `numeric(18,2)` | Giá bán tham khảo, không âm |
-| `min_stock` | `numeric(18,3)` | Mức tồn tối thiểu mặc định, không âm |
-| `status` | `varchar(20)` | `ACTIVE`, `INACTIVE`, `DISCONTINUED` |
-| `description` | `text` | Mô tả tùy chọn |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| Cột              | Kiểu            | Ràng buộc/ý nghĩa                    |
+| ---------------- | --------------- | ------------------------------------ |
+| `id`             | `uuid`          | Khóa chính                           |
+| `sku`            | `varchar(100)`  | Bắt buộc, duy nhất                   |
+| `name`           | `varchar(255)`  | Bắt buộc                             |
+| `category_id`    | `uuid`          | FK tới `categories`                  |
+| `unit_id`        | `uuid`          | FK tới `units`, bắt buộc             |
+| `purchase_price` | `numeric(18,2)` | Giá nhập tham khảo, không âm         |
+| `sale_price`     | `numeric(18,2)` | Giá bán tham khảo, không âm          |
+| `min_stock`      | `numeric(18,3)` | Mức tồn tối thiểu mặc định, không âm |
+| `status`         | `varchar(20)`   | `ACTIVE`, `INACTIVE`, `DISCONTINUED` |
+| `description`    | `text`          | Mô tả tùy chọn                       |
+| `created_at`     | `timestamptz`   | Ngày tạo                             |
+| `updated_at`     | `timestamptz`   | Ngày cập nhật                        |
 
 Ghi chú:
 
@@ -172,31 +172,31 @@ Ghi chú:
 
 ### 5.4. `warehouses`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `code` | `varchar(50)` | Bắt buộc, duy nhất |
-| `name` | `varchar(255)` | Bắt buộc |
-| `address` | `text` | Địa chỉ kho |
-| `manager_name` | `varchar(255)` | Người phụ trách |
-| `is_active` | `boolean` | Mặc định `true` |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| Cột            | Kiểu           | Ràng buộc/ý nghĩa  |
+| -------------- | -------------- | ------------------ |
+| `id`           | `uuid`         | Khóa chính         |
+| `code`         | `varchar(50)`  | Bắt buộc, duy nhất |
+| `name`         | `varchar(255)` | Bắt buộc           |
+| `address`      | `text`         | Địa chỉ kho        |
+| `manager_name` | `varchar(255)` | Người phụ trách    |
+| `is_active`    | `boolean`      | Mặc định `true`    |
+| `created_at`   | `timestamptz`  | Ngày tạo           |
+| `updated_at`   | `timestamptz`  | Ngày cập nhật      |
 
 ### 5.5. `suppliers`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `code` | `varchar(50)` | Bắt buộc, duy nhất |
-| `name` | `varchar(255)` | Bắt buộc |
-| `tax_code` | `varchar(50)` | Mã số thuế, có thể unique khi có dữ liệu |
-| `phone` | `varchar(30)` | Số điện thoại |
-| `email` | `varchar(255)` | Email |
-| `address` | `text` | Địa chỉ |
-| `is_active` | `boolean` | Mặc định `true` |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| Cột          | Kiểu           | Ràng buộc/ý nghĩa                        |
+| ------------ | -------------- | ---------------------------------------- |
+| `id`         | `uuid`         | Khóa chính                               |
+| `code`       | `varchar(50)`  | Bắt buộc, duy nhất                       |
+| `name`       | `varchar(255)` | Bắt buộc                                 |
+| `tax_code`   | `varchar(50)`  | Mã số thuế, có thể unique khi có dữ liệu |
+| `phone`      | `varchar(30)`  | Số điện thoại                            |
+| `email`      | `varchar(255)` | Email                                    |
+| `address`    | `text`         | Địa chỉ                                  |
+| `is_active`  | `boolean`      | Mặc định `true`                          |
+| `created_at` | `timestamptz`  | Ngày tạo                                 |
+| `updated_at` | `timestamptz`  | Ngày cập nhật                            |
 
 ## 6. Tồn hiện tại và lịch sử tồn
 
@@ -204,15 +204,15 @@ Ghi chú:
 
 Mỗi sản phẩm có tối đa một dòng số dư tại mỗi kho.
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `warehouse_id` | `uuid` | FK tới `warehouses`, bắt buộc |
-| `product_id` | `uuid` | FK tới `products`, bắt buộc |
-| `quantity` | `numeric(18,3)` | Tồn khả dụng hiện tại, mặc định `0` |
-| `min_stock` | `numeric(18,3)` | Ngưỡng riêng của sản phẩm tại kho; nullable |
-| `version` | `integer` | Hỗ trợ optimistic locking nếu cần |
-| `updated_at` | `timestamptz` | Lần cập nhật tồn gần nhất |
+| Cột            | Kiểu            | Ràng buộc/ý nghĩa                           |
+| -------------- | --------------- | ------------------------------------------- |
+| `id`           | `uuid`          | Khóa chính                                  |
+| `warehouse_id` | `uuid`          | FK tới `warehouses`, bắt buộc               |
+| `product_id`   | `uuid`          | FK tới `products`, bắt buộc                 |
+| `quantity`     | `numeric(18,3)` | Tồn khả dụng hiện tại, mặc định `0`         |
+| `min_stock`    | `numeric(18,3)` | Ngưỡng riêng của sản phẩm tại kho; nullable |
+| `version`      | `integer`       | Hỗ trợ optimistic locking nếu cần           |
+| `updated_at`   | `timestamptz`   | Lần cập nhật tồn gần nhất                   |
 
 Ràng buộc:
 
@@ -225,23 +225,23 @@ Ràng buộc:
 
 Sổ cái kho bất biến, ghi lại mọi lần tăng hoặc giảm tồn.
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `warehouse_id` | `uuid` | Kho bị ảnh hưởng |
-| `product_id` | `uuid` | Sản phẩm bị ảnh hưởng |
-| `movement_type` | `varchar(30)` | Loại biến động |
-| `quantity_delta` | `numeric(18,3)` | Dương khi tăng, âm khi giảm, khác `0` |
-| `quantity_before` | `numeric(18,3)` | Tồn trước giao dịch |
-| `quantity_after` | `numeric(18,3)` | Tồn sau giao dịch |
-| `unit_cost` | `numeric(18,2)` | Đơn giá tại thời điểm giao dịch, nullable |
-| `reference_type` | `varchar(50)` | Loại chứng từ nguồn |
-| `reference_id` | `uuid` | ID chứng từ nguồn |
-| `reference_item_id` | `uuid` | ID dòng chi tiết nguồn |
-| `reason` | `text` | Lý do, đặc biệt với điều chỉnh |
-| `occurred_at` | `timestamptz` | Thời điểm nghiệp vụ |
-| `created_by` | `uuid` | Người thực hiện, nếu có bảng người dùng |
-| `created_at` | `timestamptz` | Thời điểm ghi DB |
+| Cột                 | Kiểu            | Ràng buộc/ý nghĩa                         |
+| ------------------- | --------------- | ----------------------------------------- |
+| `id`                | `uuid`          | Khóa chính                                |
+| `warehouse_id`      | `uuid`          | Kho bị ảnh hưởng                          |
+| `product_id`        | `uuid`          | Sản phẩm bị ảnh hưởng                     |
+| `movement_type`     | `varchar(30)`   | Loại biến động                            |
+| `quantity_delta`    | `numeric(18,3)` | Dương khi tăng, âm khi giảm, khác `0`     |
+| `quantity_before`   | `numeric(18,3)` | Tồn trước giao dịch                       |
+| `quantity_after`    | `numeric(18,3)` | Tồn sau giao dịch                         |
+| `unit_cost`         | `numeric(18,2)` | Đơn giá tại thời điểm giao dịch, nullable |
+| `reference_type`    | `varchar(50)`   | Loại chứng từ nguồn                       |
+| `reference_id`      | `uuid`          | ID chứng từ nguồn                         |
+| `reference_item_id` | `uuid`          | ID dòng chi tiết nguồn                    |
+| `reason`            | `text`          | Lý do, đặc biệt với điều chỉnh            |
+| `occurred_at`       | `timestamptz`   | Thời điểm nghiệp vụ                       |
+| `created_by`        | `uuid`          | Người thực hiện, nếu có bảng người dùng   |
+| `created_at`        | `timestamptz`   | Thời điểm ghi DB                          |
 
 Ràng buộc:
 
@@ -254,34 +254,34 @@ Ràng buộc:
 
 ### 7.1. `goods_receipts`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `receipt_no` | `varchar(50)` | Mã phiếu, duy nhất |
-| `warehouse_id` | `uuid` | Kho nhận hàng, bắt buộc |
-| `supplier_id` | `uuid` | Nhà cung cấp |
-| `receipt_date` | `date` | Ngày nhập |
-| `received_by` | `uuid` | Người nhập hàng |
-| `status` | `varchar(20)` | DRAFT/CONFIRMED/CANCELLED |
+| Cột            | Kiểu            | Ràng buộc/ý nghĩa         |
+| -------------- | --------------- | ------------------------- |
+| `id`           | `uuid`          | Khóa chính                |
+| `receipt_no`   | `varchar(50)`   | Mã phiếu, duy nhất        |
+| `warehouse_id` | `uuid`          | Kho nhận hàng, bắt buộc   |
+| `supplier_id`  | `uuid`          | Nhà cung cấp              |
+| `receipt_date` | `date`          | Ngày nhập                 |
+| `received_by`  | `uuid`          | Người nhập hàng           |
+| `status`       | `varchar(20)`   | DRAFT/CONFIRMED/CANCELLED |
 | `total_amount` | `numeric(18,2)` | Tổng tiền do backend tính |
-| `note` | `text` | Ghi chú |
-| `confirmed_at` | `timestamptz` | Thời điểm xác nhận |
-| `confirmed_by` | `uuid` | Người xác nhận |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| `note`         | `text`          | Ghi chú                   |
+| `confirmed_at` | `timestamptz`   | Thời điểm xác nhận        |
+| `confirmed_by` | `uuid`          | Người xác nhận            |
+| `created_at`   | `timestamptz`   | Ngày tạo                  |
+| `updated_at`   | `timestamptz`   | Ngày cập nhật             |
 
 ### 7.2. `goods_receipt_items`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `receipt_id` | `uuid` | FK tới `goods_receipts`, xóa cascade khi phiếu còn draft |
-| `line_no` | `integer` | Số thứ tự dòng |
-| `product_id` | `uuid` | Sản phẩm |
-| `quantity` | `numeric(18,3)` | Số lượng nhập, lớn hơn `0` |
-| `unit_price` | `numeric(18,2)` | Đơn giá nhập, không âm |
-| `line_amount` | `numeric(18,2)` | `quantity × unit_price` |
-| `note` | `text` | Ghi chú dòng |
+| Cột           | Kiểu            | Ràng buộc/ý nghĩa                                        |
+| ------------- | --------------- | -------------------------------------------------------- |
+| `id`          | `uuid`          | Khóa chính                                               |
+| `receipt_id`  | `uuid`          | FK tới `goods_receipts`, xóa cascade khi phiếu còn draft |
+| `line_no`     | `integer`       | Số thứ tự dòng                                           |
+| `product_id`  | `uuid`          | Sản phẩm                                                 |
+| `quantity`    | `numeric(18,3)` | Số lượng nhập, lớn hơn `0`                               |
+| `unit_price`  | `numeric(18,2)` | Đơn giá nhập, không âm                                   |
+| `line_amount` | `numeric(18,2)` | `quantity × unit_price`                                  |
+| `note`        | `text`          | Ghi chú dòng                                             |
 
 Ràng buộc:
 
@@ -300,35 +300,35 @@ Khi xác nhận phiếu:
 
 ### 8.1. `goods_issues`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `issue_no` | `varchar(50)` | Mã phiếu, duy nhất |
-| `warehouse_id` | `uuid` | Kho xuất |
-| `issue_date` | `date` | Ngày xuất |
-| `issue_reason` | `varchar(100)` | Bán hàng, nội bộ hoặc lý do khác |
-| `recipient_name` | `varchar(255)` | Người/bộ phận nhận |
-| `issued_by` | `uuid` | Người xuất |
-| `status` | `varchar(20)` | DRAFT/CONFIRMED/CANCELLED |
-| `total_amount` | `numeric(18,2)` | Tổng giá trị xuất |
-| `note` | `text` | Ghi chú |
-| `confirmed_at` | `timestamptz` | Thời điểm xác nhận |
-| `confirmed_by` | `uuid` | Người xác nhận |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| Cột              | Kiểu            | Ràng buộc/ý nghĩa                |
+| ---------------- | --------------- | -------------------------------- |
+| `id`             | `uuid`          | Khóa chính                       |
+| `issue_no`       | `varchar(50)`   | Mã phiếu, duy nhất               |
+| `warehouse_id`   | `uuid`          | Kho xuất                         |
+| `issue_date`     | `date`          | Ngày xuất                        |
+| `issue_reason`   | `varchar(100)`  | Bán hàng, nội bộ hoặc lý do khác |
+| `recipient_name` | `varchar(255)`  | Người/bộ phận nhận               |
+| `issued_by`      | `uuid`          | Người xuất                       |
+| `status`         | `varchar(20)`   | DRAFT/CONFIRMED/CANCELLED        |
+| `total_amount`   | `numeric(18,2)` | Tổng giá trị xuất                |
+| `note`           | `text`          | Ghi chú                          |
+| `confirmed_at`   | `timestamptz`   | Thời điểm xác nhận               |
+| `confirmed_by`   | `uuid`          | Người xác nhận                   |
+| `created_at`     | `timestamptz`   | Ngày tạo                         |
+| `updated_at`     | `timestamptz`   | Ngày cập nhật                    |
 
 ### 8.2. `goods_issue_items`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `issue_id` | `uuid` | FK tới `goods_issues` |
-| `line_no` | `integer` | Số thứ tự |
-| `product_id` | `uuid` | Sản phẩm |
-| `quantity` | `numeric(18,3)` | Số lượng xuất, lớn hơn `0` |
-| `unit_cost` | `numeric(18,2)` | Giá vốn tại thời điểm xuất |
-| `line_amount` | `numeric(18,2)` | Giá trị dòng xuất |
-| `note` | `text` | Ghi chú |
+| Cột           | Kiểu            | Ràng buộc/ý nghĩa          |
+| ------------- | --------------- | -------------------------- |
+| `id`          | `uuid`          | Khóa chính                 |
+| `issue_id`    | `uuid`          | FK tới `goods_issues`      |
+| `line_no`     | `integer`       | Số thứ tự                  |
+| `product_id`  | `uuid`          | Sản phẩm                   |
+| `quantity`    | `numeric(18,3)` | Số lượng xuất, lớn hơn `0` |
+| `unit_cost`   | `numeric(18,2)` | Giá vốn tại thời điểm xuất |
+| `line_amount` | `numeric(18,2)` | Giá trị dòng xuất          |
+| `note`        | `text`          | Ghi chú                    |
 
 Khi xác nhận phiếu xuất:
 
@@ -353,31 +353,31 @@ Nếu tồn hiện tại nhỏ hơn số lượng xuất, rollback và trả l�
 
 ### 9.1. `stock_counts`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `count_no` | `varchar(50)` | Mã phiếu kiểm kê, duy nhất |
-| `warehouse_id` | `uuid` | Kho kiểm kê |
-| `count_date` | `date` | Ngày kiểm kê |
-| `status` | `varchar(20)` | DRAFT/CONFIRMED/CANCELLED |
-| `counted_by` | `uuid` | Người kiểm kê |
-| `note` | `text` | Ghi chú |
-| `confirmed_at` | `timestamptz` | Thời điểm xác nhận |
-| `confirmed_by` | `uuid` | Người xác nhận |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| Cột            | Kiểu          | Ràng buộc/ý nghĩa          |
+| -------------- | ------------- | -------------------------- |
+| `id`           | `uuid`        | Khóa chính                 |
+| `count_no`     | `varchar(50)` | Mã phiếu kiểm kê, duy nhất |
+| `warehouse_id` | `uuid`        | Kho kiểm kê                |
+| `count_date`   | `date`        | Ngày kiểm kê               |
+| `status`       | `varchar(20)` | DRAFT/CONFIRMED/CANCELLED  |
+| `counted_by`   | `uuid`        | Người kiểm kê              |
+| `note`         | `text`        | Ghi chú                    |
+| `confirmed_at` | `timestamptz` | Thời điểm xác nhận         |
+| `confirmed_by` | `uuid`        | Người xác nhận             |
+| `created_at`   | `timestamptz` | Ngày tạo                   |
+| `updated_at`   | `timestamptz` | Ngày cập nhật              |
 
 ### 9.2. `stock_count_items`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `count_id` | `uuid` | FK tới `stock_counts` |
-| `product_id` | `uuid` | Sản phẩm |
-| `system_quantity` | `numeric(18,3)` | Tồn hệ thống tại thời điểm chốt kiểm kê |
-| `counted_quantity` | `numeric(18,3)` | Số lượng đếm thực tế |
-| `difference_quantity` | `numeric(18,3)` | `counted_quantity - system_quantity` |
-| `reason` | `text` | Giải thích chênh lệch |
+| Cột                   | Kiểu            | Ràng buộc/ý nghĩa                       |
+| --------------------- | --------------- | --------------------------------------- |
+| `id`                  | `uuid`          | Khóa chính                              |
+| `count_id`            | `uuid`          | FK tới `stock_counts`                   |
+| `product_id`          | `uuid`          | Sản phẩm                                |
+| `system_quantity`     | `numeric(18,3)` | Tồn hệ thống tại thời điểm chốt kiểm kê |
+| `counted_quantity`    | `numeric(18,3)` | Số lượng đếm thực tế                    |
+| `difference_quantity` | `numeric(18,3)` | `counted_quantity - system_quantity`    |
+| `reason`              | `text`          | Giải thích chênh lệch                   |
 
 Lưu ý quan trọng:
 
@@ -390,31 +390,31 @@ Lưu ý quan trọng:
 
 ### 10.1. `stock_adjustments`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `adjustment_no` | `varchar(50)` | Mã phiếu, duy nhất |
-| `warehouse_id` | `uuid` | Kho điều chỉnh |
-| `adjustment_date` | `date` | Ngày điều chỉnh |
-| `reason_code` | `varchar(30)` | Hỏng, mất, thừa, nhập sai... |
-| `status` | `varchar(20)` | DRAFT/CONFIRMED/CANCELLED |
-| `note` | `text` | Lý do chi tiết, nên bắt buộc |
-| `created_by` | `uuid` | Người tạo |
-| `confirmed_at` | `timestamptz` | Thời điểm xác nhận |
-| `confirmed_by` | `uuid` | Người xác nhận |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| Cột               | Kiểu          | Ràng buộc/ý nghĩa            |
+| ----------------- | ------------- | ---------------------------- |
+| `id`              | `uuid`        | Khóa chính                   |
+| `adjustment_no`   | `varchar(50)` | Mã phiếu, duy nhất           |
+| `warehouse_id`    | `uuid`        | Kho điều chỉnh               |
+| `adjustment_date` | `date`        | Ngày điều chỉnh              |
+| `reason_code`     | `varchar(30)` | Hỏng, mất, thừa, nhập sai... |
+| `status`          | `varchar(20)` | DRAFT/CONFIRMED/CANCELLED    |
+| `note`            | `text`        | Lý do chi tiết, nên bắt buộc |
+| `created_by`      | `uuid`        | Người tạo                    |
+| `confirmed_at`    | `timestamptz` | Thời điểm xác nhận           |
+| `confirmed_by`    | `uuid`        | Người xác nhận               |
+| `created_at`      | `timestamptz` | Ngày tạo                     |
+| `updated_at`      | `timestamptz` | Ngày cập nhật                |
 
 ### 10.2. `stock_adjustment_items`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `adjustment_id` | `uuid` | FK tới phiếu điều chỉnh |
-| `product_id` | `uuid` | Sản phẩm |
+| Cột              | Kiểu            | Ràng buộc/ý nghĩa                         |
+| ---------------- | --------------- | ----------------------------------------- |
+| `id`             | `uuid`          | Khóa chính                                |
+| `adjustment_id`  | `uuid`          | FK tới phiếu điều chỉnh                   |
+| `product_id`     | `uuid`          | Sản phẩm                                  |
 | `quantity_delta` | `numeric(18,3)` | Số dương để tăng, số âm để giảm, khác `0` |
-| `unit_cost` | `numeric(18,2)` | Đơn giá tham khảo |
-| `reason` | `text` | Lý do riêng của dòng |
+| `unit_cost`      | `numeric(18,2)` | Đơn giá tham khảo                         |
+| `reason`         | `text`          | Lý do riêng của dòng                      |
 
 Điều chỉnh giảm vẫn phải kiểm tra không tạo tồn âm. Khi xác nhận, tạo movement `MANUAL_ADJUSTMENT`.
 
@@ -422,33 +422,33 @@ Lưu ý quan trọng:
 
 ### 11.1. `stock_transfers`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `transfer_no` | `varchar(50)` | Mã phiếu, duy nhất |
-| `source_warehouse_id` | `uuid` | Kho nguồn |
-| `destination_warehouse_id` | `uuid` | Kho đích |
-| `transfer_date` | `date` | Ngày chuyển |
-| `status` | `varchar(20)` | DRAFT/CONFIRMED/CANCELLED |
-| `transferred_by` | `uuid` | Người thực hiện |
-| `note` | `text` | Ghi chú |
-| `confirmed_at` | `timestamptz` | Thời điểm xác nhận |
-| `confirmed_by` | `uuid` | Người xác nhận |
-| `created_at` | `timestamptz` | Ngày tạo |
-| `updated_at` | `timestamptz` | Ngày cập nhật |
+| Cột                        | Kiểu          | Ràng buộc/ý nghĩa         |
+| -------------------------- | ------------- | ------------------------- |
+| `id`                       | `uuid`        | Khóa chính                |
+| `transfer_no`              | `varchar(50)` | Mã phiếu, duy nhất        |
+| `source_warehouse_id`      | `uuid`        | Kho nguồn                 |
+| `destination_warehouse_id` | `uuid`        | Kho đích                  |
+| `transfer_date`            | `date`        | Ngày chuyển               |
+| `status`                   | `varchar(20)` | DRAFT/CONFIRMED/CANCELLED |
+| `transferred_by`           | `uuid`        | Người thực hiện           |
+| `note`                     | `text`        | Ghi chú                   |
+| `confirmed_at`             | `timestamptz` | Thời điểm xác nhận        |
+| `confirmed_by`             | `uuid`        | Người xác nhận            |
+| `created_at`               | `timestamptz` | Ngày tạo                  |
+| `updated_at`               | `timestamptz` | Ngày cập nhật             |
 
 Ràng buộc: `source_warehouse_id <> destination_warehouse_id`.
 
 ### 11.2. `stock_transfer_items`
 
-| Cột | Kiểu | Ràng buộc/ý nghĩa |
-| --- | --- | --- |
-| `id` | `uuid` | Khóa chính |
-| `transfer_id` | `uuid` | FK tới phiếu chuyển kho |
-| `line_no` | `integer` | Số thứ tự |
-| `product_id` | `uuid` | Sản phẩm |
-| `quantity` | `numeric(18,3)` | Số lượng chuyển, lớn hơn `0` |
-| `unit_cost` | `numeric(18,2)` | Giá vốn tại thời điểm chuyển |
+| Cột           | Kiểu            | Ràng buộc/ý nghĩa            |
+| ------------- | --------------- | ---------------------------- |
+| `id`          | `uuid`          | Khóa chính                   |
+| `transfer_id` | `uuid`          | FK tới phiếu chuyển kho      |
+| `line_no`     | `integer`       | Số thứ tự                    |
+| `product_id`  | `uuid`          | Sản phẩm                     |
+| `quantity`    | `numeric(18,3)` | Số lượng chuyển, lớn hơn `0` |
+| `unit_cost`   | `numeric(18,2)` | Giá vốn tại thời điểm chuyển |
 
 Khi xác nhận trong cùng một transaction:
 
@@ -553,12 +553,12 @@ Tồn kho A:        52
 
 Các movement tương ứng:
 
-| Loại | Delta | Trước | Sau |
-| --- | ---: | ---: | ---: |
-| RECEIPT | +20 | 50 | 70 |
-| ISSUE | -5 | 70 | 65 |
-| MANUAL_ADJUSTMENT | -3 | 65 | 62 |
-| TRANSFER_OUT | -10 | 62 | 52 |
+| Loại              | Delta | Trước | Sau |
+| ----------------- | ----: | ----: | --: |
+| RECEIPT           |   +20 |    50 |  70 |
+| ISSUE             |    -5 |    70 |  65 |
+| MANUAL_ADJUSTMENT |    -3 |    65 |  62 |
+| TRANSFER_OUT      |   -10 |    62 |  52 |
 
 Kho B nhận thêm một movement `TRANSFER_IN` có delta `+10`.
 

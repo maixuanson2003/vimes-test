@@ -1,8 +1,6 @@
 import type { MigrationInterface, QueryRunner } from "typeorm";
 
-export class AddWarehouseDocumentStatus1788060000000
-  implements MigrationInterface
-{
+export class AddWarehouseDocumentStatus1788060000000 implements MigrationInterface {
   async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
       CREATE TYPE warehouse_document_status AS ENUM (

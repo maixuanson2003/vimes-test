@@ -16,14 +16,6 @@ export class ProductRepository extends BaseRepository<Product> {
       order: { name: "ASC" },
     });
   }
-  findLowStock() {
-    return this.repository
-      .createQueryBuilder("p")
-      .where("p.so_luong_ton <= p.ton_toi_thieu")
-      .andWhere("p.trang_thai = :status", { status: ProductStatus.ACTIVE })
-      .orderBy("p.so_luong_ton", "ASC")
-      .getMany();
-  }
   async changeStock(
     manager: EntityManager,
     productId: number,

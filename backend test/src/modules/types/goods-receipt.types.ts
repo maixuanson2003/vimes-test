@@ -27,6 +27,9 @@ export type createReceipt = {
   ItemReceipt: ItemReceipt[];
 };
 
-export type updateReceipt = Omit<createReceipt, "receiptNumber" | "ItemReceipt"> & {
+export type updateReceipt = Omit<
+  createReceipt,
+  "receiptNumber" | "ItemReceipt"
+> & {
   ItemReceipt?: ItemReceipt[];
 };

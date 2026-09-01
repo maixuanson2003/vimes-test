@@ -10,12 +10,14 @@ const inputSchema = z.object({
   email: z.string().email(),
   name: z.string().trim().min(1).max(150),
   role: z.nativeEnum(UserRole),
-  isActive: z.preprocess(
-    (value) => value === "true" ? true : value === "false" ? false : value,
-    z.boolean(),
-  ).default(true),
+  isActive: z
+    .preprocess(
+      (value) => (value === "true" ? true : value === "false" ? false : value),
+      z.boolean(),
+    )
+    .default(true),
   password: z.preprocess(
-    (value) => value === "" ? undefined : value,
+    (value) => (value === "" ? undefined : value),
     z.string().min(8).optional(),
   ),
 });
@@ -37,16 +39,16 @@ export class UserController {
   };
 
   create: RequestHandler = async (req, res) => {
-    const input = inputSchema.extend({ password: z.string().min(8) }).parse(req.body);
-    const user = await this.repository.create(
-      {
-        email: input.email.trim().toLowerCase(),
-        name: input.name,
-        role: input.role,
-        isActive: input.isActive,
-        passwordHash: await hashPassword(input.password),
-      },
-    );
+    const input = inputSchema
+      .extend({ password: z.string().min(8) })
+      .parse(req.body);
+    const user = await this.repository.create({
+      email: input.email.trim().toLowerCase(),
+      name: input.name,
+      role: input.role,
+      isActive: input.isActive,
+      passwordHash: await hashPassword(input.password),
+    });
     res.status(201).json({ success: true, data: publicUser(user) });
   };
 
@@ -54,15 +56,21 @@ export class UserController {
     const input = inputSchema.partial().parse(req.body);
     const user = await this.repository.findById(idSchema.parse(req.params.id));
     if (!user) {
-      res.status(404).json({ success: false, error: { code: "ENTITY_NOT_FOUND" } });
+      res
+        .status(404)
+        .json({ success: false, error: { code: "ENTITY_NOT_FOUND" } });
       return;
     }
-    if (input.email !== undefined) user.email = input.email.trim().toLowerCase();
+    if (input.email !== undefined)
+      user.email = input.email.trim().toLowerCase();
     if (input.name !== undefined) user.name = input.name;
     if (input.role !== undefined) user.role = input.role;
     if (input.isActive !== undefined) user.isActive = input.isActive;
     if (input.password) user.passwordHash = await hashPassword(input.password);
-    res.json({ success: true, data: publicUser(await this.repository.save(user)) });
+    res.json({
+      success: true,
+      data: publicUser(await this.repository.save(user)),
+    });
   };
 
   delete: RequestHandler = async (req, res) => {

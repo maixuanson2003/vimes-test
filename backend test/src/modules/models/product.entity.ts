@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import type { Relation } from "typeorm";
-import { InventoryAdjustment } from "./inventory-adjustment.entity.js";
 import { GoodsIssueItem } from "./goods-issue-item.entity.js";
 import { GoodsReceiptItem } from "./goods-receipt-item.entity.js";
 import { numericTransformer } from "./numeric.transformer.js";
@@ -51,15 +50,6 @@ export class Product {
   })
   stockQuantity!: number;
   @Column({
-    name: "ton_toi_thieu",
-    type: "numeric",
-    precision: 18,
-    scale: 3,
-    default: 0,
-    transformer: numericTransformer,
-  })
-  minimumStock!: number;
-  @Column({
     name: "trang_thai",
     type: "enum",
     enum: ProductStatus,
@@ -73,6 +63,4 @@ export class Product {
   receiptItems!: Relation<GoodsReceiptItem[]>;
   @OneToMany(() => GoodsIssueItem, (item) => item.product)
   issueItems!: Relation<GoodsIssueItem[]>;
-  @OneToMany(() => InventoryAdjustment, (adjustment) => adjustment.product)
-  adjustments!: Relation<InventoryAdjustment[]>;
 }

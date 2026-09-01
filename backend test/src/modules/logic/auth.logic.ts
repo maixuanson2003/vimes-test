@@ -101,7 +101,9 @@ export class AuthLogic {
       where: seedUsers.map((seed) => ({ email: seed.email })),
     });
     const existingEmails = new Set(existing.map((user) => user.email));
-    const missingUsers = seedUsers.filter((seed) => !existingEmails.has(seed.email));
+    const missingUsers = seedUsers.filter(
+      (seed) => !existingEmails.has(seed.email),
+    );
     if (!missingUsers.length) return;
     const passwordHash = await hashPassword(env.SEED_USER_PASSWORD);
     for (const seed of missingUsers) {

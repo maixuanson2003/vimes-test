@@ -18,6 +18,8 @@ export class CreateInventorySchema1788050000000 implements MigrationInterface {
     `);
   }
   async down(q: QueryRunner): Promise<void> {
-    await q.query(`DROP TABLE IF EXISTS dieu_chinh_ton_kho, phieu_xuat_kho_chi_tiet, phieu_xuat_kho, phieu_nhap_kho_chi_tiet, phieu_nhap_kho, san_pham, nha_cung_cap CASCADE; DROP TYPE IF EXISTS product_status;`);
+    await q.query(
+      `DROP TABLE IF EXISTS dieu_chinh_ton_kho, phieu_xuat_kho_chi_tiet, phieu_xuat_kho, phieu_nhap_kho_chi_tiet, phieu_nhap_kho, san_pham, nha_cung_cap CASCADE; DROP TYPE IF EXISTS product_status;`,
+    );
   }
 }

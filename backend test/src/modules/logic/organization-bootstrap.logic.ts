@@ -7,7 +7,9 @@ export class OrganizationBootstrapLogic {
     const organizationRepository = AppDataSource.getRepository(Organization);
     const departmentRepository = AppDataSource.getRepository(Department);
 
-    let organization = await organizationRepository.findOneBy({ code: "VIMES" });
+    let organization = await organizationRepository.findOneBy({
+      code: "VIMES",
+    });
     if (!organization) {
       organization = await organizationRepository.save(
         organizationRepository.create({
@@ -29,8 +31,12 @@ export class OrganizationBootstrapLogic {
     const existing = await departmentRepository.find({
       where: departments.map((department) => ({ code: department.code })),
     });
-    const existingCodes = new Set(existing.map((department) => department.code));
-    const missing = departments.filter((department) => !existingCodes.has(department.code));
+    const existingCodes = new Set(
+      existing.map((department) => department.code),
+    );
+    const missing = departments.filter(
+      (department) => !existingCodes.has(department.code),
+    );
     if (!missing.length) return;
     await departmentRepository.save(
       missing.map((department) =>
@@ -41,6 +47,8 @@ export class OrganizationBootstrapLogic {
         }),
       ),
     );
-    console.log(`Bootstrap departments created: ${missing.map((item) => item.code).join(", ")}`);
+    console.log(
+      `Bootstrap departments created: ${missing.map((item) => item.code).join(", ")}`,
+    );
   }
 }

@@ -9,8 +9,7 @@ export class Supplier {
   @Column({ name: "dia_chi", type: "varchar", length: 255, nullable: true })
   address!: string | null;
   @Column({ name: "sdt", type: "varchar", length: 20, nullable: true }) phone!:
-    | string
-    | null;
+    string | null;
   @OneToMany(() => GoodsReceipt, (receipt) => receipt.supplier)
   goodsReceipts!: Relation<GoodsReceipt[]>;
 }

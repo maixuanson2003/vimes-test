@@ -1,3 +1,10 @@
-import { Router } from "express"; import { asyncHandler } from "../../middlewares/async-handler.js"; import { DepartmentController } from "../controllers/department.controller.js";
-const controller = new DepartmentController(); export const departmentRouter = Router();
-departmentRouter.get("/", asyncHandler(controller.findAll)); departmentRouter.get("/:id", asyncHandler(controller.findById)); departmentRouter.post("/", asyncHandler(controller.create)); departmentRouter.patch("/:id", asyncHandler(controller.update)); departmentRouter.delete("/:id", asyncHandler(controller.delete));
+import { Router } from "express";
+import { asyncHandler } from "../../middlewares/async-handler.js";
+import { DepartmentController } from "../controllers/department.controller.js";
+const controller = new DepartmentController();
+export const departmentRouter = Router();
+departmentRouter.get("/", asyncHandler(controller.findAll));
+departmentRouter.get("/:id", asyncHandler(controller.findById));
+departmentRouter.post("/", asyncHandler(controller.create));
+departmentRouter.patch("/:id", asyncHandler(controller.update));
+departmentRouter.delete("/:id", asyncHandler(controller.delete));

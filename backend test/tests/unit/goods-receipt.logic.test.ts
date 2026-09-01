@@ -102,17 +102,20 @@ describe("GoodsReceiptLogic status transitions", () => {
     });
     findByReceiptIdMock.mockResolvedValue([]);
 
-    await expect(new GoodsReceiptLogic().confirmReceipt(1)).rejects.toMatchObject(
-      { statusCode: 409, code: "INVALID_RECEIPT_STATUS" },
-    );
+    await expect(
+      new GoodsReceiptLogic().confirmReceipt(1),
+    ).rejects.toMatchObject({
+      statusCode: 409,
+      code: "INVALID_RECEIPT_STATUS",
+    });
   });
 
   it("returns 404 when cancelling a missing receipt", async () => {
     findByIdMock.mockResolvedValue(null);
 
-    await expect(new GoodsReceiptLogic().cancelReceipt(99)).rejects.toMatchObject(
-      { statusCode: 404, code: "ENTITY_NOT_FOUND" },
-    );
+    await expect(
+      new GoodsReceiptLogic().cancelReceipt(99),
+    ).rejects.toMatchObject({ statusCode: 404, code: "ENTITY_NOT_FOUND" });
   });
 
   it("rejects cancelling a confirmed receipt", async () => {
@@ -121,9 +124,12 @@ describe("GoodsReceiptLogic status transitions", () => {
       status: WarehouseDocumentStatus.CONFIRMED,
     });
 
-    await expect(new GoodsReceiptLogic().cancelReceipt(1)).rejects.toMatchObject(
-      { statusCode: 409, code: "INVALID_RECEIPT_STATUS" },
-    );
+    await expect(
+      new GoodsReceiptLogic().cancelReceipt(1),
+    ).rejects.toMatchObject({
+      statusCode: 409,
+      code: "INVALID_RECEIPT_STATUS",
+    });
     expect(updateMock).not.toHaveBeenCalled();
   });
 });

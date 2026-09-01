@@ -5,7 +5,6 @@ import { ProductController } from "../controllers/product.controller.js";
 const controller = new ProductController();
 export const productRouter = Router();
 
-productRouter.get("/low-stock", asyncHandler(controller.findLowStock));
 productRouter.get("/", asyncHandler(controller.findAll));
 productRouter.get("/:id", asyncHandler(controller.findById));
 productRouter.post("/", asyncHandler(controller.create));

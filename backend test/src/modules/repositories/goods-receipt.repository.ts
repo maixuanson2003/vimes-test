@@ -45,5 +45,4 @@ export class GoodsReceiptRepository extends BaseRepository<GoodsReceipt> {
       .where("receipt.id = :id", { id })
       .getOne();
   }
-
 }

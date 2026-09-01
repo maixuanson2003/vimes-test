@@ -5,7 +5,7 @@ export * from "./goods-receipt-item.entity.js";
 export * from "./goods-receipt-attachment.entity.js";
 export * from "./goods-issue.entity.js";
 export * from "./goods-issue-item.entity.js";
-export * from "./inventory-adjustment.entity.js";
+export * from "./goods-issue-attachment.entity.js";
 export * from "./warehouse-document-status.enum.js";
 export * from "./user.entity.js";
 export * from "./organization.entity.js";

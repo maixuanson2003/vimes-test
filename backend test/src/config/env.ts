@@ -16,7 +16,10 @@ export const env = z
       .default("false")
       .transform((v) => v === "true"),
     CORS_ORIGIN: z.string().default("http://localhost:5173"),
-    JWT_SECRET: z.string().min(32).default("development-only-jwt-secret-change-me"),
+    JWT_SECRET: z
+      .string()
+      .min(32)
+      .default("development-only-jwt-secret-change-me"),
     JWT_EXPIRES_IN_SECONDS: z.coerce.number().int().positive().default(28800),
     ADMIN_EMAIL: z.string().email().default("admin@vimes.local"),
     ADMIN_PASSWORD: z.string().min(8).default("Admin@123"),
